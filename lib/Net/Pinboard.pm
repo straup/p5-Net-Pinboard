@@ -1,20 +1,19 @@
-# $Id: Delicious.pm,v 1.71 2008/03/03 16:55:04 asc Exp $
-
-package Net::Delicious;
 use strict;
 
-$Net::Delicious::VERSION = '1.13';
+package Net::Pinboard;
+
+$Net::Pinboard::VERSION = '2.0';
 
 =head1 NAME
 
-Net::Delicious - OOP for the del.icio.us API
+Net::Pinboard - OOP for the pinboard.in API
 
 =head1 SYNOPSIS
 
-  use Net::Delicious;
+  use Net::Pinboard;
   use Log::Dispatch::Screen;
 
-  my $del = Net::Delicious->new({user => "foo",
+  my $del = Net::Pinboard->new({user => "foo",
 				 pswd => "bar"});
 
   foreach my $p ($del->recent_posts()) {
@@ -23,12 +22,12 @@ Net::Delicious - OOP for the del.icio.us API
 
 =head1 DESCRIPTION
 
-OOP for the del.icio.us API
+OOP for the pinboard.in API
 
 =cut
 
-use Net::Delicious::Constants qw (:pause :response :uri);
-use Net::Delicious::Config;
+use Net::Pinboard::Constants qw (:pause :response :uri);
+use Net::Pinboard::Config;
 
 use HTTP::Request;
 use LWP::UserAgent;
@@ -55,7 +54,7 @@ use English;
 
 =head2 __PACKAGE__->new(\%args || Config::Simple)
 
-Arguments to the Net::Delicious object may be defined in one of three ways :
+Arguments to the Net::Pinboard object may be defined in one of three ways :
 
 =over 4
 
@@ -76,13 +75,13 @@ deprecated. Valid hash reference arguments are :
 
 String. I<required>
 
-Your del.icio.us username.
+Your pinboard.in username.
 
 =item * B<pswd>
 
 String. I<required>
 
-Your del.icio.us password.
+Your pinboard.in password.
 
 =item * B<updates>
 
@@ -93,7 +92,7 @@ update to your bookmarks can be recorded. This is used by
 the I<all_posts> method to prevent abusive requests.
 
 Default is the current user's home directory; If the home directory
-can not be determined Net::Delicious will use a temporary directory
+can not be determined Net::Pinboard will use a temporary directory
 as determined by File::Temp.
 
 =item * B<debug>
@@ -106,7 +105,7 @@ Add a I<Log::Dispatch::Screen> dispatcher to log debug
 =back
 
 I<Config::Simple> options are expected to be grouped in a "block"
-labeled B<delicious>. Valid options are :
+labeled B<pinboard>. Valid options are :
 
 =over 4
 
@@ -114,13 +113,13 @@ labeled B<delicious>. Valid options are :
 
 String. I<required>
 
-Your del.icio.us username.
+Your pinboard.in username.
 
 =item * B<pswd>
 
 String. I<required>
 
-Your del.icio.us password.
+Your pinboard.in password.
 
 =item * B<updates>
 
@@ -138,7 +137,7 @@ a temporary directory as determined by File::Temp.
 String.
 
 You may specify one of three XML parsers to use to handle response
-messages from the del.icio.us servers. You many want to do this if,
+messages from the pinboard.in servers. You many want to do this if,
 instead of Perl-ish objects, you want to access the raw XML and parse
 it with XPath or XSLT or some other crazy moon language.
 
@@ -147,7 +146,7 @@ it with XPath or XSLT or some other crazy moon language.
 =item * B<simple>
 
 This uses L<XML::Simple> to parse messages. If present, all successful
-API method calls will return, where applicable,  Net::Delicious::* objects.
+API method calls will return, where applicable,  Net::Pinboard::* objects.
 
 =item * B<libxml>
 
@@ -155,7 +154,7 @@ This uses L<XML::LibXML> to parse messages. If present, all successful
 API method calls will return a I<XML::LibXML::Document> object.
 
 Future releases may allow responses parsed with libxml to be returned as
-Net::Delicious::* objects.
+Net::Pinboard::* objects.
 
 =item * B<xpath>
 
@@ -163,7 +162,7 @@ This uses L<XML::XPath> to parse messages. If present, all successful
 API method calls will return a I<XML::XPath> object.
 
 Future releases may allow responses parsed with XML::XPath to be returned as
-Net::Delicious::* objects.
+Net::Pinboard::* objects.
 
 =back
 
@@ -174,8 +173,8 @@ The default value is B<simple>.
 Boolean.
 
 Set to true if you are using L<XML::Simple> to parse response messages
-from the del.icio.us servers but want to return the object's original
-data structure rather than Net::Delicious::* objects.
+from the pinboard.in servers but want to return the object's original
+data structure rather than Net::Pinboard::* objects.
 
 Default is false.
 
@@ -189,7 +188,7 @@ There's no particular reason you should ever need to set this unless,
 say, this module falls horribly out of date with the API itself. Anyway, 
 now you can.
 
-Default is B<https://api.del.icio.us/v1/>
+Default is B<https://api.pinboard.in/v1/>
 
 =item * B<debug>
 
@@ -200,12 +199,12 @@ Add a I<Log::Dispatch::Screen> dispatcher to log debug
 
 =back
 
-Returns a Net::Delicious object or undef if there was a problem
+Returns a Net::Pinboard object or undef if there was a problem
 creating the object.
 
 It is also possible to set additional config options to tweak the
 default settings for API call parameters and API response properties.
-Please consult the POD for L<Net::Delicious::Config> for details.
+Please consult the POD for L<Net::Pinboard::Config> for details.
 
 =cut
 
@@ -246,7 +245,7 @@ sub new {
         }
 
         else {
-                $cfg = Net::Delicious::Config->mk_config($args);
+                $cfg = Net::Pinboard::Config->mk_config($args);
 
                 if (! $cfg) {
                         warn "Failed to create internal config object, $!";
@@ -254,14 +253,14 @@ sub new {
                 }
         }
                 
-        Net::Delicious::Config->merge_configs($cfg);
+        Net::Pinboard::Config->merge_configs($cfg);
         $self->{'__cfg'} = $cfg;
 
         #
         #
         #
 
-        my $parser_cfg = $cfg->param("delicious.xml_parser");
+        my $parser_cfg = $cfg->param("pinboard.xml_parser");
         my $parser_pkg = undef;
 
         if ($parser_cfg eq "libxml") {
@@ -293,7 +292,7 @@ sub new {
 
         #
 
-        if ($self->config("delicious.debug")) {
+        if ($self->config("pinboard.debug")) {
                 require Log::Dispatch::Screen;
                 $self->logger()->add(Log::Dispatch::Screen->new(name      => "debug",
                                                                 min_level => "debug",
@@ -319,7 +318,7 @@ a W3CDTF string.
 sub update {
         my $self = shift;
 
-        my $res = $self->_execute_method("delicious.posts.update"); 
+        my $res = $self->_execute_method("pinboard.posts.update"); 
         return ($res) ? $res->{time} : undef;
 }
 
@@ -329,7 +328,7 @@ sub update {
 
 =head2 $obj->add_post(\%args)
 
-Makes a post to del.icio.us.
+Makes a post to pinboard.in.
 
 Valid arguments are :
 
@@ -389,7 +388,7 @@ sub add_post {
     my $self = shift;
     my $args = shift;
 
-    my $res = $self->_execute_method("delicious.posts.add", $args);
+    my $res = $self->_execute_method("pinboard.posts.add", $args);
 
     if (! $self->_use_rsp_parser()) {
             return $res;
@@ -400,7 +399,7 @@ sub add_post {
 
 =head2 $obj->delete_post(\%args)
 
-Delete a post from del.icio.us.
+Delete a post from pinboard.in.
 
 Valid arguments are :
 
@@ -420,7 +419,7 @@ sub delete_post {
     my $self = shift;
     my $args = shift;
 
-    my $res = $self->_execute_method("delicious.posts.delete", $args);
+    my $res = $self->_execute_method("pinboard.posts.delete", $args);
 
     if (! $self->_use_rsp_parser()) {
             return $res;
@@ -445,10 +444,10 @@ Filter by this tag.
 
 =back
 
-Returns a list of I<Net::Delicious::Date> objects
+Returns a list of I<Net::Pinboard::Date> objects
 when called in an array context.
 
-Returns a I<Net::Delicious::Iterator> object when called
+Returns a I<Net::Pinboard::Iterator> object when called
 in a scalar context.
 
 =cut
@@ -457,7 +456,7 @@ sub posts_per_date {
     my $self = shift;
     my $args = shift;
 
-    my $res = $self->_execute_method("delicious.posts.dates", $args);
+    my $res = $self->_execute_method("pinboard.posts.dates", $args);
 
     if (! $res) {
             return;
@@ -493,10 +492,10 @@ Number of posts to return. Default is 20; maximum is 100
 
 =back
 
-Returns a list of I<Net::Delicious::Post> objects
+Returns a list of I<Net::Pinboard::Post> objects
 when called in an array context.
 
-Returns a I<Net::Delicious::Iterator> object when called
+Returns a I<Net::Pinboard::Iterator> object when called
 in a scalar context.
 
 =cut
@@ -505,7 +504,7 @@ sub recent_posts {
         my $self = shift;
         my $args = shift;
         
-        my $res = $self->_execute_method("delicious.posts.recent", $args);
+        my $res = $self->_execute_method("pinboard.posts.recent", $args);
         
         if (! $res) {
                 return;
@@ -521,10 +520,10 @@ sub recent_posts {
 
 =head2 $obj->all_posts()
 
-Returns a list of I<Net::Delicious::Post> objects
+Returns a list of I<Net::Pinboard::Post> objects
 when called in an array context.
 
-Returns a I<Net::Delicious::Iterator> object when called
+Returns a I<Net::Pinboard::Iterator> object when called
 in a scalar context.
 
 If no posts have been added between calls to this method,
@@ -541,7 +540,7 @@ sub all_posts {
                 return;
         }
 
-        my $res = $self->_execute_method("delicious.posts.all");
+        my $res = $self->_execute_method("pinboard.posts.all");
 
         if (! $res) {
                 return;
@@ -578,10 +577,10 @@ Filter by this date.
 
 =back
 
-Returns a list of I<Net::Delicious::Post> objects
+Returns a list of I<Net::Pinboard::Post> objects
 when called in an array context.
 
-Returns a I<Net::Delicious::Iterator> object when called
+Returns a I<Net::Pinboard::Iterator> object when called
 in a scalar context.
 
 =cut
@@ -592,7 +591,7 @@ sub posts {
         
         #
 
-        my $res = $self->_execute_method("delicious.posts.get", $args);
+        my $res = $self->_execute_method("pinboard.posts.get", $args);
         
         if (! $res) {
                 return;
@@ -621,7 +620,7 @@ Returns a list of tags.
 sub tags {
         my $self = shift;
 
-        my $res = $self->_execute_method("delicious.tags.get");
+        my $res = $self->_execute_method("pinboard.tags.get");
 
         if (! $res) {
                 return;
@@ -667,7 +666,7 @@ sub rename_tag {
         my $self = shift;
         my $args = shift;
 
-        my $res = $self->_execute_method("delicious.tags.rename", $args);
+        my $res = $self->_execute_method("pinboard.tags.rename", $args);
 
         if (! $self->_use_rsp_parser()) {
                 return $res;
@@ -693,10 +692,10 @@ The tag you want to retrieve posts for.
 
 =back
 
-Returns a list of I<Net::Delicious::Post> objects
+Returns a list of I<Net::Pinboard::Post> objects
 when called in an array context.
 
-Returns a I<Net::Delicious::Iterator> object when called
+Returns a I<Net::Pinboard::Iterator> object when called
 in a scalar context.
 
 =cut
@@ -754,10 +753,10 @@ sub all_posts_for_tag {
 
 =head2 $obj->bundles()
 
-Returns a list of I<Net::Delicious::Bundle> objects
+Returns a list of I<Net::Pinboard::Bundle> objects
 when called in an array context.
 
-Returns a I<Net::Delicious::Iterator> object when called
+Returns a I<Net::Pinboard::Iterator> object when called
 in a scalar context.
 
 =cut
@@ -765,7 +764,7 @@ in a scalar context.
 sub bundles {
         my $self = shift;
         
-        my $res = $self->_execute_method("delicious.tags.bundles.all");
+        my $res = $self->_execute_method("pinboard.tags.bundles.all");
 
         if (! $self->_use_rsp_parser()) {
                 return $res;
@@ -826,7 +825,7 @@ sub set_bundle {
         my $self = shift;
         my $args = shift;
         
-        my $res = $self->_execute_method("delicious.tags.bundles.set", $args);
+        my $res = $self->_execute_method("pinboard.tags.bundles.set", $args);
 
         if (! $self->_use_rsp_parser()) {
                 return $res;
@@ -857,7 +856,7 @@ sub delete_bundle {
         my $self = shift;
         my $args = shift;
         
-        my $res = $self->_execute_method("delicious.tags.bundles.delete", $args); 
+        my $res = $self->_execute_method("pinboard.tags.bundles.delete", $args); 
 
         if (! $self->_use_rsp_parser()) {
                 return $res;
@@ -903,24 +902,35 @@ sub config {
 
 =head2 $obj->username()
 
-Returns the del.icio.us username for the current object.
+Returns the pinboard.in username for the current object.
 
 =cut
 
 sub username {
         my $self = shift;
-        return $self->config("delicious.user");
+        return $self->config("pinboard.user");
 }
 
 =head2 $obj->password()
 
-Returns the del.icio.us password for the current object.
+Returns the pinboard.in password for the current object.
 
 =cut
 
 sub password {
         my $self = shift;
-        return $self->config("delicious.pswd");
+        return $self->config("pinboard.pswd");
+}
+
+=head2 $obj->auth_token()
+
+Returns the pinboard.in authentication token for the current object.
+
+=cut
+
+sub token {
+        my $self = shift;
+        return $self->config("pinboard.auth_token");
 }
 
 =head2 $object->user_agent()
@@ -937,7 +947,7 @@ sub user_agent {
         
         if (ref($self->{'__ua'}) ne "LWP::UserAgent") {
                 my $ua = LWP::UserAgent->new();
-                $ua->agent(sprintf("%s, %s", __PACKAGE__, $Net::Delicious::VERSION));
+                $ua->agent(sprintf("%s, %s", __PACKAGE__, $Net::Pinboard::VERSION));
                 $ua->env_proxy(1);
 
                 $self->{'__ua'} = $ua;
@@ -1005,11 +1015,11 @@ sub _is_updated {
 sub _path_update {
         my $self = shift;
         
-        my $file = sprintf(".del.icio.us.%s", $self->config("delicious.user"));
+        my $file = sprintf(".pinboard.in.%s", $self->config("pinboard.user"));
 
         if (! $self->{'__updates'}){
 
-                my $user_cfg = $self->config("delicious.updates");
+                my $user_cfg = $self->config("pinboard.updates");
 
                 if ($user_cfg) {
                         $self->{'__updates'} = $user_cfg;
@@ -1102,7 +1112,7 @@ sub _buildrequest {
                 exists($args->{$_}) && $args->{$_}
         } @$params;
 
-        my $endpoint = $self->config("delicious.endpoint");
+        my $endpoint = $self->config("pinboard.endpoint");
         my $uri      = URI->new_abs($meth, $endpoint);
 
         $uri->query_form(%query);
@@ -1159,7 +1169,7 @@ sub _sendrequest {
                         return undef;
                 }
 
-                # check to see if the del.icio.us server
+                # check to see if the pinboard.in server
                 # requests that we hold off for a set amount
                 # of time - otherwise wait a little longer
                 # than the last time
@@ -1211,7 +1221,7 @@ sub _parse_xml {
         my $self = shift;
         my $res  = shift;
 
-        my $parser = $self->config("delicious.xml_parser");
+        my $parser = $self->config("pinboard.xml_parser");
         my $xml    = undef;
 
         eval {
@@ -1253,7 +1263,7 @@ sub _ua {
         
         if (ref($self->{'__ua'}) ne "LWP::UserAgent") {
                 my $ua = LWP::UserAgent->new();
-                $ua->agent(sprintf("%s, %s", __PACKAGE__, $Net::Delicious::VERSION));
+                $ua->agent(sprintf("%s, %s", __PACKAGE__, $Net::Pinboard::VERSION));
                 
                 $self->{'__ua'} = $ua;
         }
@@ -1288,7 +1298,7 @@ sub _buildresults {
         
         $type =~ s/:://g;
 
-        if ($self->config("delicious.use_dev")) {
+        if ($self->config("pinboard.use_dev")) {
                 # Debugging ... so much hate
                 unshift @INC, "./lib";
         }
@@ -1313,8 +1323,8 @@ sub _buildresults {
                 } @$results;
         }
         
-        require Net::Delicious::Iterator;
-        return Net::Delicious::Iterator->new($fclass,
+        require Net::Pinboard::Iterator;
+        return Net::Pinboard::Iterator->new($fclass,
                                              $results);    
 }
 
@@ -1324,7 +1334,7 @@ sub _mk_object_data {
         my $results = shift;
 
         my $block = lc($type);
-        my @props = split("," , $self->config("delicious_properties.$block"));
+        my @props = split("," , $self->config("pinboard_properties.$block"));
 
         my %object_data = map {
                 $_ => $results->{$_};
@@ -1336,11 +1346,11 @@ sub _mk_object_data {
 sub _use_rsp_parser {
         my $self = shift;
 
-        if ($self->config("delicious.xml_parser") ne "simple") {
+        if ($self->config("pinboard.xml_parser") ne "simple") {
                 return 0;
         }
 
-        if ($self->config("delicious.force_xml_objects")) {
+        if ($self->config("pinboard.force_xml_objects")) {
                 return 0;
         }
 
@@ -1404,11 +1414,11 @@ up to you to provide it with a dispatcher.
 
 =head1 VERSION
 
-1.13
+2.0
 
 =head1 DATE 
 
-$Date: 2008/03/03 16:55:04 $
+2014-04-15
 
 =head1 AUTHOR
 
@@ -1416,7 +1426,7 @@ Aaron Straup Cope <ascope@cpan.org>
 
 =head1 SEE ALSO
 
-http://del.icio.us/doc/api
+https://pinboard.in/api/
 
 =head1 NOTES
 
@@ -1424,7 +1434,7 @@ This package implements the API in its entirety as of I<DATE>.
 
 =head1 LICENSE
 
-Copyright (c) 2004-2008, Aaron Straup Cope. All Rights Reserved.
+Copyright (c) 2004-2014, Aaron Straup Cope. All Rights Reserved.
 
 This is free software, you may use it and distribute it under the
 same terms as Perl itself.

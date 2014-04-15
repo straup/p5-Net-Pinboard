@@ -8,7 +8,7 @@ $Net::Pinboard::Date::VERSION = '1.13';
 
 =head1 NAME
 
-Net::Pinboard::Date - OOP for del.icio.us date thingies
+Net::Pinboard::Date - OOP for pinboard.in date thingies
 
 =head1 SYNOPSIS
 
@@ -25,7 +25,7 @@ Net::Pinboard::Date - OOP for del.icio.us date thingies
 
 =head1 DESCRIPTION
 
-OOP for del.icio.us date thingies.
+OOP for pinboard.in date thingies.
 
 =head1 NOTES
 
@@ -96,11 +96,11 @@ Return the object as a hash ref safe for serializing and re-blessing.
 
 =head1 VERSION
 
-1.13
+2.0
 
 =head1 DATE
 
-$Date: 2008/03/03 16:55:04 $
+2014-04-15
 
 =head1 AUTHOR
 
@@ -112,7 +112,7 @@ L<Net::Pinboard>
 
 =head1 LICENSE
 
-Copyright (c) 2004-2008 Aaron Straup Cope. All rights reserved.
+Copyright (c) 2004-2014 Aaron Straup Cope. All rights reserved.
 
 This is free software, you may use it and distribute it under the
 same terms as Perl itself.

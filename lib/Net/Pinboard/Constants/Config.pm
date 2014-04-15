@@ -1,35 +1,35 @@
-package Net::Delicious::Constants::Config;
+package Net::Pinboard::Constants::Config;
 use strict;
 
 # $Id: Config.pm,v 1.10 2008/03/03 16:55:04 asc Exp $
 
-$Net::Delicious::Constants::Config::VERSION = '1.13';
+$Net::Pinboard::Constants::Config::VERSION = '1.13';
 
 =head1 NAME
 
-Net::Delicious::Constants::Config - constant variables for Net::Delicious default configs.
+Net::Pinboard::Constants::Config - constant variables for Net::Pinboard default configs.
 
 =head1 SYNOPSIS
 
- use Net::Delicious::Constants qw (:config)
+ use Net::Pinboard::Constants qw (:config)
 
 =head1 DESCRIPTION
 
-Constant variables for Net::Delicious default configs.
+Constant variables for Net::Pinboard default configs.
 
 =cut
 
-use Net::Delicious::Constants qw(:uri);
+use Net::Pinboard::Constants qw(:uri);
 
 =head1 CONSTANTS
 
 =cut
 
-=head2 DELICIOUS_CFG_STD
+=head2 PINBOARD_CFG_STD
 
 =cut
 
-use constant DELICIOUS_CFG_STD => (endpoint          => URI_API,
+use constant PINBOARD_CFG_STD => (endpoint          => URI_API,
                                    xml_parser        => 'simple',
                                    force_xml_objects => 0,
                                    debug             => 0,
@@ -37,11 +37,11 @@ use constant DELICIOUS_CFG_STD => (endpoint          => URI_API,
                                    pswd              => '',
                                    updates           => '');
 
-=head2 DELICIOUS_CFG_API
+=head2 PINBOARD_CFG_API
 
 =cut
 
-use constant DELICIOUS_CFG_API => (tags => {"get"    => {},
+use constant PINBOARD_CFG_API => (tags => {"get"    => {},
                                             "rename" => {"old" => "required",
                                                          "new" => "required"}},
 
@@ -67,11 +67,11 @@ use constant DELICIOUS_CFG_API => (tags => {"get"    => {},
                                              "update" => {}},
           );
 
-=head2 DELICIOUS_CFG_PROPERTIES
+=head2 PINBOARD_CFG_PROPERTIES
 
 =cut
 
-use constant DELICIOUS_CFG_PROPERTIES => (date          => "tag,date,count,user",
+use constant PINBOARD_CFG_PROPERTIES => (date          => "tag,date,count,user",
                                           post          => "description,extended,href,time,parent,tag,others,shared",
                                           bundle        => "name, tag",
                                           user          => "name",
@@ -81,18 +81,18 @@ use constant DELICIOUS_CFG_PROPERTIES => (date          => "tag,date,count,user"
 BEGIN {
     use vars qw (@EXPORT_OK);
     
-    @EXPORT_OK = qw (DELICIOUS_CFG_STD
-                     DELICIOUS_CFG_API
-                     DELICIOUS_CFG_PROPERTIES);
+    @EXPORT_OK = qw (PINBOARD_CFG_STD
+                     PINBOARD_CFG_API
+                     PINBOARD_CFG_PROPERTIES);
 }
 
 =head1 VERSION
 
-1.13
+2.0
 
 =head1 DATE
 
-$Date: 2008/03/03 16:55:04 $
+2014-04-15
 
 =head1 AUTHOR
 
@@ -100,15 +100,15 @@ Aaron Straup Cope <ascope@cpan.org>
 
 =head1 SEE ALSO
 
-L<Net::Delicious>
+L<Net::Pinboard>
 
-L<Net::Delicious::Config>
+L<Net::Pinboard::Config>
 
-L<Net::Delicious::Constants>
+L<Net::Pinboard::Constants>
 
 =head1 LICENSE
 
-Copyright (c) 2004-2008 Aaron Straup Cope. All rights reserved.
+Copyright (c) 2004-2014 Aaron Straup Cope. All rights reserved.
 
 This is free software, you may use it and distribute it under the
 same terms as Perl itself.

@@ -1,15 +1,15 @@
-package Net::Delicious::Constants::Pause;
+package Net::Pinboard::Constants::Pause;
 use strict;
 
 # $Id: Pause.pm,v 1.13 2008/03/03 16:55:04 asc Exp $
 
 =head1 NAME
 
-Net::Delicious::Constants::Pause - 
+Net::Pinboard::Constants::Pause - 
 
 =head1 SYNOPSIS
 
- use Net::Delicious::Constants qw (:pause)
+ use Net::Pinboard::Constants qw (:pause)
 
 =head1 DESCRIPTION
 
@@ -17,7 +17,7 @@ Constant variables for del.icio.us
 
 =cut
 
-$Net::Delicious::Constants::Pause::VERSION = '1.13';
+$Net::Pinboard::Constants::Pause::VERSION = '1.13';
 
 =head1 CONSTANTS
 
@@ -66,11 +66,11 @@ BEGIN {
 
 =head1 VERSION
 
-1.13
+2.0
 
 =head1 DATE
 
-$Date: 2008/03/03 16:55:04 $
+2014-04-15
 
 =head1 AUTHOR
 
@@ -78,13 +78,13 @@ Aaron Straup Cope <ascope@cpan.org>
 
 =head1 SEE ALSO
 
-L<Net::Delicious>
+L<Net::Pinboard>
 
-L<Net::Delicious::Constants>
+L<Net::Pinboard::Constants>
 
 =head1 LICENSE
 
-Copyright (c) 2004-2008 Aaron Straup Cope. All rights reserved.
+Copyright (c) 2004-2014 Aaron Straup Cope. All rights reserved.
 
 This is free software, you may use it and distribute it under the
 same terms as Perl itself.

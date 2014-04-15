@@ -7,7 +7,7 @@ $Net::Pinboard::Constants::VERSION = '1.13';
 
 =head1 NAME
 
-Net::Pinboard::Constants - del.icio.us constant variables
+Net::Pinboard::Constants - pinboard.in constant variables
 
 =head1 SYNOPSIS
 
@@ -19,7 +19,7 @@ Net::Pinboard::Constants - del.icio.us constant variables
 
 =head1 DESCRIPTION
 
-Import del.icio.us constant variables
+Import pinboard.in constant variables
 
 =cut
 
@@ -74,11 +74,11 @@ sub import {
 
 =head1 VERSION
 
-1.13
+2.0
 
 =head1 DATE
 
-$Date: 2008/03/03 16:55:04 $
+2014-04-15
 
 =head1 AUTHOR
 
@@ -90,7 +90,7 @@ L<Net::Pinboard>
 
 =head1 LICENSE
 
-Copyright (c) 2004-2008 Aaron Straup Cope. All rights reserved.
+Copyright (c) 2004-2014 Aaron Straup Cope. All rights reserved.
 
 This is free software, you may use it and distribute it under the
 same terms as Perl itself.

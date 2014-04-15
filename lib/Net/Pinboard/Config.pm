@@ -24,7 +24,7 @@ know, you're in to that kind of thing.
 The only caveat is that in order to override default configuaration for request and response
 properties you will need to pass the Net::Pinboard object constructor a Config::Simple object
 or the path to a valid "ini" style config file. (Arguments passed to the constructor as a hash
-reference are assumed to be part of the default B<delicious> configs.)
+reference are assumed to be part of the default B<pinboard> configs.)
 
 It is important to remember that these config options, and definitions, are not meant to be a
 complete web services description nor do they play one on TV. They are some bare-bones glue
@@ -36,9 +36,9 @@ of sync with the API or they've dreampt up some wacky project that uses Net::Pin
 =head1 DEFAULT CONFIGS
 
 These are outlined in the POD for the L<Net::Pinboard> object constructor. They
-are basically anything define in the B<[delicious]> block.
+are basically anything define in the B<[pinboard]> block.
 
-Default API response configs are defined in Net::Pinboard::Constants::Config::DELICIOUS_CFG_STD.
+Default API response configs are defined in Net::Pinboard::Constants::Config::PINBOARD_CFG_STD.
 
 =cut
 
@@ -48,7 +48,7 @@ API call configs are the set of allowable parameters that may be sent to del.ici
 with a given method call along with flags to indicate whether an argument is required
 or needs some special magic DWIM munging.
 
-The basic syntax for block names is the string B<delicious>, the lower-case name of the
+The basic syntax for block names is the string B<pinboard>, the lower-case name of the
 API class (posts, user, etc.) followed by the lower-case name of the method all joined by
 underbars.
 
@@ -60,7 +60,7 @@ DWIM if the user passes boolean true or false.
 
 For example :
 
- [delicious_posts_add]
+ [pinboard_posts_add]
  url="required"
  description=""
  extended=""
@@ -72,11 +72,11 @@ For example :
 If a method class is nested, the syntax requires that all B</> strings be replaced by underbars.
 For example B<tags/bundles/set> is defined as :
  
- [delicious_tags_bundles_set]
+ [pinboard_tags_bundles_set]
  bundle="required"
  tags="required"
 
-Default API response configs are defined in Net::Pinboard::Constants::Config::DELICIOUS_CFG_API.
+Default API response configs are defined in Net::Pinboard::Constants::Config::PINBOARD_CFG_API.
 
 =cut
 
@@ -85,13 +85,13 @@ Default API response configs are defined in Net::Pinboard::Constants::Config::DE
 API response configs define the properties that are expected to be returned in a given
 method call and mapped to object methods.
 
-As of this writings, all properites are defined in the B<delicious_properties> block.
+As of this writings, all properites are defined in the B<pinboard_properties> block.
 
 The basic syntax for block arguments is the lower-case name of the Net::Pinboard object class 
 followed by a comma-separated list of properties/methods. Unless already defined in their parent
 package, "get" methods for each property will be automagically created.
 
- [delicious_properties]
+ [pinboard_properties]
  date="tag,date,count,user"
  post="description,extended,href,time,parent,tag,others,shared"
  bundle="name,tag"
@@ -99,7 +99,7 @@ package, "get" methods for each property will be automagically created.
  subscriptions="user,tag"
  tag="tag,count"
 
-Default API response configs are defined in Net::Pinboard::Constants::Config::DELICIOUS_CFG_PROPERTIES.
+Default API response configs are defined in Net::Pinboard::Constants::Config::PINBOARD_CFG_PROPERTIES.
 
 =cut
 
@@ -111,7 +111,7 @@ sub mk_config {
         my $args = shift;
 
         my $cfg = Config::Simple->new(syntax => "ini");
-        $cfg->set_block("delicious", $args);
+        $cfg->set_block("pinboard", $args);
 
         return $cfg;
 }
@@ -120,7 +120,7 @@ sub merge_configs {
         my $pkg = shift;
         my $cfg = shift;
 
-        $pkg->merge_defaults($cfg, "delicious", {DELICIOUS_CFG_STD});
+        $pkg->merge_defaults($cfg, "pinboard", {PINBOARD_CFG_STD});
         $pkg->merge_api_parameters($cfg);
         $pkg->merge_rsp_properties($cfg);
 
@@ -131,8 +131,8 @@ sub merge_rsp_properties {
         my $pkg = shift;
         my $cfg = shift;
 
-        my $defaults = {DELICIOUS_CFG_PROPERTIES};
-        my $block    = "delicious_properties";
+        my $defaults = {PINBOARD_CFG_PROPERTIES};
+        my $block    = "pinboard_properties";
 
         $pkg->merge_defaults($cfg, $block, $defaults);
         return 1;
@@ -142,12 +142,12 @@ sub merge_api_parameters {
         my $pkg = shift;
         my $cfg = shift;
 
-        my $defaults = {DELICIOUS_CFG_API};
+        my $defaults = {PINBOARD_CFG_API};
 
         foreach my $class (keys %$defaults) {
 
                 foreach my $meth (keys %{$defaults->{$class}}) {
-                        my $block = join("_", "delicious", $class, $meth);
+                        my $block = join("_", "pinboard", $class, $meth);
                         $pkg->merge_defaults($cfg, $block, $defaults->{$class}->{$meth});
                 }
         }
@@ -177,11 +177,11 @@ sub merge_defaults {
 
 =head1 VERSION
 
-1.13
+2.0
 
 =head1 DATE
 
-$Date: 2008/03/03 16:55:04 $
+2014-04-15
 
 =head1 AUTHOR
 
@@ -189,7 +189,7 @@ Aaron Straup Cope E<lt>ascope@cpan.orgE<gt>
 
 =head1 LICENSE
 
-Copyright (c) 2004-2008 Aaron Straup Cope. All rights reserved.
+Copyright (c) 2004-2014 Aaron Straup Cope. All rights reserved.
 
 This is free software, you may use it and distribute it under the
 same terms as Perl itself.

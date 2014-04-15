@@ -1,15 +1,15 @@
-package Net::Delicious::Constants::Response;
+package Net::Pinboard::Constants::Response;
 use strict;
 
 # $Id: Response.pm,v 1.12 2008/03/03 16:55:04 asc Exp $
 
 =head1 NAME
 
-Net::Delicious::Constants::Response - constant variables for del.icio.us response messages
+Net::Pinboard::Constants::Response - constant variables for del.icio.us response messages
 
 =head1 SYNOPSIS
 
- use Net::Delicious::Constants qw (:response)
+ use Net::Pinboard::Constants qw (:response)
 
 =head1 DESCRIPTION
 
@@ -17,7 +17,7 @@ Constant variables for del.icio.us response messages.
 
 =cut
 
-$Net::Delicious::Constants::Response::VERSION = '1.13';
+$Net::Pinboard::Constants::Response::VERSION = '1.13';
 
 =head1 CONSTANTS
 
@@ -52,11 +52,11 @@ BEGIN {
 
 =head1 VERSION
 
-1.13
+2.0
 
 =head1 DATE
 
-$Date: 2008/03/03 16:55:04 $
+2014-04-15
 
 =head1 AUTHOR
 
@@ -64,13 +64,13 @@ Aaron Straup Cope <ascope@cpan.org>
 
 =head1 SEE ALSO
 
-L<Net::Delicious>
+L<Net::Pinboard>
 
-L<Net::Delicious::Constants>
+L<Net::Pinboard::Constants>
 
 =head1 LICENSE
 
-Copyright (c) 2004-2008 Aaron Straup Cope. All rights reserved.
+Copyright (c) 2004-2014 Aaron Straup Cope. All rights reserved.
 
 This is free software, you may use it and distribute it under the
 same terms as Perl itself.

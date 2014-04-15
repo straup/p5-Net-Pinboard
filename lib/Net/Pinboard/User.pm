@@ -1,14 +1,13 @@
-# $Id: User.pm,v 1.11 2008/03/03 16:55:04 asc Exp $
 use strict;
 
 package Net::Pinboard::User;
 use base qw (Net::Pinboard::Object);
 
-$Net::Pinboard::User::VERSION = '1.13';
+$Net::Pinboard::User::VERSION = '2.0';
 
 =head1 NAME
 
-Net::Pinboard::User - OOP for del.icio.us user thingies
+Net::Pinboard::User - OOP for pinboard.in user thingies
 
 =head1 SYNOPSIS
 
@@ -23,7 +22,7 @@ Net::Pinboard::User - OOP for del.icio.us user thingies
 
 =head1 DESCRIPTION
 
-OOP for del.icio.us user thingies.
+OOP for pinboard.in user thingies.
 
 =head1 NOTES
 
@@ -78,11 +77,11 @@ Return the object as a hash ref safe for serializing and re-blessing.
 
 =head1 VERSION
 
-1.13
+2.0
 
 =head1 DATE
 
-$Date: 2008/03/03 16:55:04 $
+2014-04-15
 
 =head1 AUTHOR
 
@@ -94,7 +93,7 @@ L<Net::Pinboard>
 
 =head1 LICENSE
 
-Copyright (c) 2004-2008 Aaron Straup Cope. All rights reserved.
+Copyright (c) 2004-2014 Aaron Straup Cope. All rights reserved.
 
 This is free software, you may use it and distribute it under the
 same terms as Perl itself.
