@@ -3,7 +3,7 @@ use strict;
 
 package Net::Pinboard::Constants;
 
-$Net::Pinboard::Constants::VERSION = '1.13';
+$Net::Pinboard::Constants::VERSION = '2.0';
 
 =head1 NAME
 

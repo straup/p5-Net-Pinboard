@@ -12,9 +12,9 @@ Net::Pinboard::User - OOP for pinboard.in user thingies
 =head1 SYNOPSIS
 
   use Net::Pinboard;
-  my $del = Net::Pinboard->new({...});
+  my $pinl = Net::Pinboard->new({...});
 
-  foreach my $post ($del->recent_posts()) {
+  foreach my $post ($pin->recent_posts()) {
 
       my $user = $post->user();
       print $user->name()."\n";

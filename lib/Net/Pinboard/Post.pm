@@ -13,9 +13,9 @@ Net::Pinboard::Post - OOP for pinboard.in post thingies
 =head1 SYNOPSIS
 
   use Net::Pinboard;
-  my $del = Net::Pinboard->new({...});
+  my $pin = Net::Pinboard->new({...});
 
-  foreach my $post ($del->recent_posts()) {
+  foreach my $post ($pin->recent_posts()) {
 
       # $post is a Net::Pinboard::Post 
       # object.

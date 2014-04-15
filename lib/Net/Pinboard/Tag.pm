@@ -12,9 +12,9 @@ Net::Pinboard::Tag - OOP for pinboard.in tag thingies
 =head1 SYNOPSIS
 
   use Net::Pinboard;
-  my $del = Net::Pinboard->new({...});
+  my $pin = Net::Pinboard->new({...});
 
-  foreach my $tag ($del->tags()) {
+  foreach my $tag ($pin->tags()) {
 
       # $tag is a Net::Pinboard::Tag 
       # object.

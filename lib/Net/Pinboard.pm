@@ -13,10 +13,9 @@ Net::Pinboard - OOP for the pinboard.in API
   use Net::Pinboard;
   use Log::Dispatch::Screen;
 
-  my $del = Net::Pinboard->new({user => "foo",
-				 pswd => "bar"});
+  my $pin = Net::Pinboard->new({'auth_token' => 'foo:bar'});
 
-  foreach my $p ($del->recent_posts()) {
+  foreach my $p ($pin->recent_posts()) {
       print $p->description()."\n";
   } 
 

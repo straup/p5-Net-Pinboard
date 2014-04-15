@@ -4,7 +4,7 @@ use strict;
 package Net::Pinboard::Date;
 use base qw (Net::Pinboard::Object);
 
-$Net::Pinboard::Date::VERSION = '1.13';
+$Net::Pinboard::Date::VERSION = '2.0';
 
 =head1 NAME
 
@@ -13,9 +13,9 @@ Net::Pinboard::Date - OOP for pinboard.in date thingies
 =head1 SYNOPSIS
 
   use Net::Pinboard;
-  my $del = Net::Pinboard->new({...});
+  my $pin = Net::Pinboard->new({...});
 
-  foreach my $dt ($del->post_per_date({...})) {
+  foreach my $dt ($pin->post_per_date({...})) {
 
       # $dt is a Net::Pinboard::Date
       # object.

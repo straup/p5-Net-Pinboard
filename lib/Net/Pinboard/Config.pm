@@ -1,7 +1,7 @@
 # $Id: Config.pm,v 1.18 2008/03/03 16:55:04 asc Exp $
 
 package Net::Pinboard::Config;
-$Net::Pinboard::Config::VERSION = '1.13';
+$Net::Pinboard::Config::VERSION = '2.0';
 
 =head1 NAME
 

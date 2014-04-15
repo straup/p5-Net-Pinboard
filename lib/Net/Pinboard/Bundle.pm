@@ -4,7 +4,7 @@ use strict;
 package Net::Pinboard::Bundle;
 use base qw (Net::Pinboard::Object);
 
-$Net::Pinboard::Bundle::VERSION = '1.13';
+$Net::Pinboard::Bundle::VERSION = '2.0';
 
 use overload q("") => sub { shift->name(); };
 
@@ -15,9 +15,9 @@ Net::Pinboard::Bundle - OOP for pinboard.in bundle thingies
 =head1 SYNOPSIS
 
   use Net::Pinboard;
-  my $del = Net::Pinboard->new({...});
+  my $pin = Net::Pinboard->new({...});
 
-  foreach my $bundle ($del->bundles()) {
+  foreach my $bundle ($pin->bundles()) {
 
       # $post is a Net::Pinboard::Bundle 
       # object.
