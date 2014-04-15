@@ -1,9 +1,7 @@
 package Net::Pinboard::Constants::Config;
 use strict;
 
-# $Id: Config.pm,v 1.10 2008/03/03 16:55:04 asc Exp $
-
-$Net::Pinboard::Constants::Config::VERSION = '1.13';
+$Net::Pinboard::Constants::Config::VERSION = '2.0';
 
 =head1 NAME
 
@@ -30,12 +28,13 @@ use Net::Pinboard::Constants qw(:uri);
 =cut
 
 use constant PINBOARD_CFG_STD => (endpoint          => URI_API,
-                                   xml_parser        => 'simple',
-                                   force_xml_objects => 0,
-                                   debug             => 0,
-                                   user              => '',
-                                   pswd              => '',
-                                   updates           => '');
+				  xml_parser        => 'simple',
+				  force_xml_objects => 0,
+				  debug             => 0,
+				  user              => '',
+				  pswd              => '',
+				  auth_token => '',
+				  updates           => '');
 
 =head2 PINBOARD_CFG_API
 

@@ -73,15 +73,19 @@ deprecated. Valid hash reference arguments are :
 
 =item * B<user> 
 
-String. I<required>
+String.
 
 Your pinboard.in username.
 
 =item * B<pswd>
 
-String. I<required>
+String.
 
-Your pinboard.in password.
+=item * B<auth_token>
+
+String.
+
+A valid pinboard.in auth token.
 
 =item * B<updates>
 
@@ -211,17 +215,12 @@ Please consult the POD for L<Net::Pinboard::Config> for details.
 sub new {
         my $pkg  = shift;
         my $args = shift;
-    
-        #
-        
+
         my $self = {
                     '__wait'    => 0,
                     '__paused'  => 0,
                    };
         
-        #
-        #
-
         my $cfg = undef;
 
         if (ref($args) eq "Config::Simple") {
@@ -245,6 +244,7 @@ sub new {
         }
 
         else {
+
                 $cfg = Net::Pinboard::Config->mk_config($args);
 
                 if (! $cfg) {
@@ -252,13 +252,10 @@ sub new {
                         return;
                 }
         }
-                
+
         Net::Pinboard::Config->merge_configs($cfg);
         $self->{'__cfg'} = $cfg;
 
-        #
-        #
-        #
 
         my $parser_cfg = $cfg->param("pinboard.xml_parser");
         my $parser_pkg = undef;
@@ -283,10 +280,6 @@ sub new {
         }
 
         $parser_pkg->import();
-
-        #
-        #
-        #
 
         bless $self, $pkg;
 
@@ -505,7 +498,7 @@ sub recent_posts {
         my $args = shift;
         
         my $res = $self->_execute_method("pinboard.posts.recent", $args);
-        
+
         if (! $res) {
                 return;
         }
@@ -928,7 +921,7 @@ Returns the pinboard.in authentication token for the current object.
 
 =cut
 
-sub token {
+sub auth_token {
         my $self = shift;
         return $self->config("pinboard.auth_token");
 }
@@ -1055,9 +1048,10 @@ sub _execute_method {
 
         $uri =~ s/\./\//g;
 
-        my $req    = $self->_buildrequest($uri, $args, $params);
-        my $res    = $self->_sendrequest($req);
+        my $req = $self->_buildrequest($uri, $args, $params);
+        my $res = $self->_sendrequest($req);
 
+	print $req->as_string();
         return $res;
 }
 
@@ -1115,12 +1109,22 @@ sub _buildrequest {
         my $endpoint = $self->config("pinboard.endpoint");
         my $uri      = URI->new_abs($meth, $endpoint);
 
+	# TO DO: move all the token stuff into _authorize?
+	# (20140415/straup)
+
+	my $token = $self->auth_token();
+
+	if ($token){
+	    $query{'auth_token'} = $token;
+	}
+
         $uri->query_form(%query);
 
         my $req = HTTP::Request->new(GET => $uri);
-        $self->_authorize($req);
 
-        #
+	if (! $token){
+	    $self->_authorize($req);
+	}
 
         $self->logger()->debug($req->as_string());
         return $req;
@@ -1255,6 +1259,7 @@ sub _parse_xml {
 sub _authorize {
         my $self = shift;
         my $req  = shift;
+
         $req->authorization_basic($self->username(), $self->password());
 }
 
