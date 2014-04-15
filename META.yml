@@ -19,13 +19,13 @@ provides:
     version: 2.0
   Net::Pinboard::Bundle:
     file: lib/Net/Pinboard/Bundle.pm
-    version: 1.13
+    version: 2.0
   Net::Pinboard::Config:
     file: lib/Net/Pinboard/Config.pm
-    version: 1.13
+    version: 2.0
   Net::Pinboard::Constants:
     file: lib/Net/Pinboard/Constants.pm
-    version: 1.13
+    version: 2.0
   Net::Pinboard::Constants::Config:
     file: lib/Net/Pinboard/Constants/Config.pm
     version: 2.0
@@ -40,7 +40,7 @@ provides:
     version: 1.13
   Net::Pinboard::Date:
     file: lib/Net/Pinboard/Date.pm
-    version: 1.13
+    version: 2.0
   Net::Pinboard::Iterator:
     file: lib/Net/Pinboard/Iterator.pm
     version: 2.0

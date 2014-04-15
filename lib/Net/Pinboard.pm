@@ -23,6 +23,8 @@ Net::Pinboard - OOP for the pinboard.in API
 
 OOP for the pinboard.in API
 
+IMPORTANT: Despite appearances this is basically code from *2008*. Specifically it is a nearby line-for-line clone of the Net::Delicious library. Pinboard has always transparently supported the old del.icio.us API so it was easy to use Net::Delicious with pinboard simply by changing the API endpoint. Since then Delicious became no fun and Pinboard added the ability to perform API calls using an auth token so this library is mostly just to support that one feature, changing everything from 'delicious' to 'pinboard' along the way. This is probably not how I would write a Pinboard (or Delicious) API wrapper in 2014 but it works and life is too short to refactor all the things on first principles, alone.
+
 =cut
 
 use Net::Pinboard::Constants qw (:pause :response :uri);
