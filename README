@@ -15,7 +15,7 @@ DESCRIPTION
     OOP for the pinboard.in API
 
     IMPORTANT: Despite appearances this is basically code from *2008*.
-    Specifically it is a nearby line-for-line clone of the Net::Delicious
+    Specifically it is a nearly line-for-line clone of the Net::Delicious
     library. Pinboard has always transparently supported the old del.icio.us
     API so it was easy to use Net::Delicious with pinboard simply by
     changing the API endpoint. Since then Delicious became no fun and
