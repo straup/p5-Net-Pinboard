@@ -21,3 +21,4 @@ Makefile.PL
 META.yml
 README
 t/01-load.t
+META.json

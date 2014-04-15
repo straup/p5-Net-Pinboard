@@ -1,75 +1,78 @@
 ---
-name: Net-Delicious
-version: 1.13
+abstract: 'OOP for the pinboard.in API'
 author:
   - 'Aaron Straup Cope <ascope@cpan.org>'
-abstract: OOP for the del.icio.us API
+build_requires:
+  Test::Simple: 0.47
+configure_requires:
+  Module::Build: 0.40
+dynamic_config: 1
+generated_by: 'Module::Build version 0.4005, CPAN::Meta::Converter version 2.112621'
 license: perl
-resources:
-  license: http://dev.perl.org/licenses/
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Net-Pinboard
+provides:
+  Net::Pinboard:
+    file: lib/Net/Pinboard.pm
+    version: 2.0
+  Net::Pinboard::Bundle:
+    file: lib/Net/Pinboard/Bundle.pm
+    version: 1.13
+  Net::Pinboard::Config:
+    file: lib/Net/Pinboard/Config.pm
+    version: 1.13
+  Net::Pinboard::Constants:
+    file: lib/Net/Pinboard/Constants.pm
+    version: 1.13
+  Net::Pinboard::Constants::Config:
+    file: lib/Net/Pinboard/Constants/Config.pm
+    version: 2.0
+  Net::Pinboard::Constants::Pause:
+    file: lib/Net/Pinboard/Constants/Pause.pm
+    version: 1.13
+  Net::Pinboard::Constants::Response:
+    file: lib/Net/Pinboard/Constants/Response.pm
+    version: 2.0
+  Net::Pinboard::Constants::Uri:
+    file: lib/Net/Pinboard/Constants/Uri.pm
+    version: 1.13
+  Net::Pinboard::Date:
+    file: lib/Net/Pinboard/Date.pm
+    version: 1.13
+  Net::Pinboard::Iterator:
+    file: lib/Net/Pinboard/Iterator.pm
+    version: 2.0
+  Net::Pinboard::Object:
+    file: lib/Net/Pinboard/Object.pm
+    version: 2.0
+  Net::Pinboard::Post:
+    file: lib/Net/Pinboard/Post.pm
+    version: 2.0
+  Net::Pinboard::Subscription:
+    file: lib/Net/Pinboard/Subscription.pm
+    version: 2.0
+  Net::Pinboard::Tag:
+    file: lib/Net/Pinboard/Tag.pm
+    version: 2.0
+  Net::Pinboard::User:
+    file: lib/Net/Pinboard/User.pm
+    version: 2.0
 requires:
   Config::Simple: 2
   Crypt::SSLeay: 0
-  Date::Parse: '>= 2.27'
-  File::Spec: '>= 0.8'
-  FileHandle: '>= 2'
-  HTTP::Request: ''
-  IO::AtomicFile: '>= 2.1'
-  LWP::UserAgent: ''
-  Log::Dispatch: '>= 2'
-  Time::HiRes: '>= 1.65'
-  URI: ''
-  XML::Simple: '>= 2'
-  YAML: '>= 0.35'
-build_requires:
-  Test::Simple: '>= 0.47'
-provides:
-  Net::Delicious:
-    file: lib/Net/Delicious.pm
-    version: 1.13
-  Net::Delicious::Bundle:
-    file: lib/Net/Delicious/Bundle.pm
-    version: 1.13
-  Net::Delicious::Config:
-    file: lib/Net/Delicious/Config.pm
-    version: 1.13
-  Net::Delicious::Constants:
-    file: lib/Net/Delicious/Constants.pm
-    version: 1.13
-  Net::Delicious::Constants::Config:
-    file: lib/Net/Delicious/Constants/Config.pm
-    version: 1.13
-  Net::Delicious::Constants::Pause:
-    file: lib/Net/Delicious/Constants/Pause.pm
-    version: 1.13
-  Net::Delicious::Constants::Response:
-    file: lib/Net/Delicious/Constants/Response.pm
-    version: 1.13
-  Net::Delicious::Constants::Uri:
-    file: lib/Net/Delicious/Constants/Uri.pm
-    version: 1.13
-  Net::Delicious::Date:
-    file: lib/Net/Delicious/Date.pm
-    version: 1.13
-  Net::Delicious::Iterator:
-    file: lib/Net/Delicious/Iterator.pm
-    version: 1.13
-  Net::Delicious::Object:
-    file: lib/Net/Delicious/Object.pm
-    version: 1.13
-  Net::Delicious::Post:
-    file: lib/Net/Delicious/Post.pm
-    version: 1.13
-  Net::Delicious::Subscription:
-    file: lib/Net/Delicious/Subscription.pm
-    version: 1.13
-  Net::Delicious::Tag:
-    file: lib/Net/Delicious/Tag.pm
-    version: 1.13
-  Net::Delicious::User:
-    file: lib/Net/Delicious/User.pm
-    version: 1.13
-generated_by: Module::Build version 0.2808
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+  Date::Parse: 2.27
+  File::Spec: 0.8
+  FileHandle: 2
+  HTTP::Request: 0
+  IO::AtomicFile: 2.1
+  LWP::UserAgent: 0
+  Log::Dispatch: 2
+  Time::HiRes: 1.65
+  URI: 0
+  XML::Simple: 2
+  YAML: 0.35
+resources:
+  license: http://dev.perl.org/licenses/
+version: 2.0
