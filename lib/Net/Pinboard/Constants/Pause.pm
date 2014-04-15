@@ -13,7 +13,7 @@ Net::Pinboard::Constants::Pause -
 
 =head1 DESCRIPTION
 
-Constant variables for del.icio.us 
+Constant variables for pinboard.in 
 
 =cut
 

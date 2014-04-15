@@ -44,7 +44,7 @@ Default API response configs are defined in Net::Pinboard::Constants::Config::PI
 
 =head1 API CALL CONFIGS
 
-API call configs are the set of allowable parameters that may be sent to del.icio.us
+API call configs are the set of allowable parameters that may be sent to pinboard.in
 with a given method call along with flags to indicate whether an argument is required
 or needs some special magic DWIM munging.
 

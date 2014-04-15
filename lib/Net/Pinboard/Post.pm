@@ -8,7 +8,7 @@ $Net::Pinboard::Post::VERSION = '2.0';
 
 =head1 NAME
 
-Net::Pinboard::Post - OOP for del.icio.us post thingies
+Net::Pinboard::Post - OOP for pinboard.in post thingies
 
 =head1 SYNOPSIS
 
@@ -25,7 +25,7 @@ Net::Pinboard::Post - OOP for del.icio.us post thingies
 
 =head1 DESCRIPTION
 
-OOP for del.icio.us post thingies.
+OOP for pinboard.in post thingies.
 
 =head1 NOTES
 

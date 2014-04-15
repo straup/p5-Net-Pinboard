@@ -1,11 +1,9 @@
 package Net::Pinboard::Constants::Response;
 use strict;
 
-# $Id: Response.pm,v 1.12 2008/03/03 16:55:04 asc Exp $
-
 =head1 NAME
 
-Net::Pinboard::Constants::Response - constant variables for del.icio.us response messages
+Net::Pinboard::Constants::Response - constant variables for pinboard.in response messages
 
 =head1 SYNOPSIS
 
@@ -13,11 +11,11 @@ Net::Pinboard::Constants::Response - constant variables for del.icio.us response
 
 =head1 DESCRIPTION
 
-Constant variables for del.icio.us response messages.
+Constant variables for pinboard.in response messages.
 
 =cut
 
-$Net::Pinboard::Constants::Response::VERSION = '1.13';
+$Net::Pinboard::Constants::Response::VERSION = '2.0';
 
 =head1 CONSTANTS
 
